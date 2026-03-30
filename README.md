@@ -35,3 +35,20 @@ cp -R ./issue-worktree ~/.claude/skills/issue-worktree
 说明：
 - issue 元信息（title/url）推荐通过 MCP 获取；脚本也支持 best-effort 的本机方式（可选），但不再是硬前置。
 - 分支名强制英文/ASCII（团队约束）。
+- 当前仓库版本已包含 `agents/openai.yaml`，便于 Skill UI 展示与隐式触发。
+
+## agree-and-execute
+
+对用户的简短批准语做“继续执行”语义补全，例如“好的”“继续”“按这个来”“1 & 2”。
+
+说明：
+- 适合把上一步已经明确的方案继续推进到执行。
+- 不适合替代新的需求描述或变更范围说明。
+
+## commit-push-pr
+
+把当前 Git 改动整理为提交、推送分支，并创建 GitHub Pull Request。
+
+说明：
+- 遵循 GitHub Flow，不直接往 `main` 推送功能改动。
+- 适合“提交 PR”“帮我 commit 并 push”“开个 PR”这类请求。
