@@ -11,6 +11,7 @@ Handle the full git delivery flow from local changes to remote pull request. Pre
 
 1. Confirm repository and branch state.
 2. Inspect the diff and decide whether changes should be split into multiple commits.
+   - Also decide whether this change requires README, docs, changelog, migration notes, or ops/runbook updates.
 3. If currently on `main` or `master`, create a topic branch before committing.
 4. Stage the appropriate files.
 5. Create one or more clear commit messages.
@@ -23,6 +24,12 @@ Handle the full git delivery flow from local changes to remote pull request. Pre
 - Follow GitHub Flow: do not push feature work directly to `main` or `master`.
 - Prefer Conventional Commits such as `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`.
 - Keep unrelated changes out of the same commit.
+- Before committing, evaluate whether documentation must be updated:
+  - User-visible behavior changed
+  - Usage or configuration steps changed
+  - API / CLI / contract changed
+  - Deployment, migration, or operational steps changed
+- Pure refactors, tests, formatting, or dependency hygiene without behavior change do not require docs by default.
 - If there is a linked issue, include `Fixes #<issue-number>` in the PR body when appropriate.
 - If branch naming is not obvious, choose a short descriptive branch name based on the change.
 
