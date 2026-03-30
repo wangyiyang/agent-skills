@@ -1,0 +1,6 @@
+interface:
+  display_name: "Issue Worktree"
+  short_description: "Create a branch and sibling worktree from a GitHub issue"
+  default_prompt: "Use $issue-worktree to create a branch and sibling worktree from this GitHub issue."
+policy:
+  allow_implicit_invocation: true
