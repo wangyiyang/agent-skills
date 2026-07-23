@@ -1,28 +1,28 @@
-# agent-skills
+# dev-agent-skills
 
-团队共享的 Codex Skills 仓库（GitHub Flow）。
+个人开发使用的 Agent Skills 仓库，适用于 Claude Code、Pi、Codex 等各类开发 Agent。
 
-## Codex 安装
+## 安装
 
-当前仓库维护的是一组自定义 Codex skills，建议直接同步到个人目录 `~/.codex/skills/`。
-
-单个 skill 安装：
+使用 [skills CLI](https://github.com/vercel-labs/skills) 安装，自动检测本机 Agent（Claude Code、Pi、Codex 等）并写入对应 skills 目录：
 
 ```bash
-mkdir -p ~/.codex/skills
-rsync -a ./issue-worktree/ ~/.codex/skills/issue-worktree/
+# 交互式选择要安装的 skill 和目标 Agent
+npx skills add wangyiyang/dev-agent-skills
+
+# 全部 skills 装到所有 Agent，跳过确认
+npx skills add wangyiyang/dev-agent-skills --all
 ```
 
-批量同步当前仓库全部自定义 skills：
+常用命令：
 
 ```bash
-mkdir -p ~/.codex/skills
-for skill in agree-and-execute changelog-generator commit-push-pr issue-worktree prompt-engineering; do
-  rsync -a "./$skill/" "~/.codex/skills/$skill/"
-done
+npx skills list -g          # 查看已安装
+npx skills update           # 更新到最新版本
+npx skills remove <skill>   # 卸载
 ```
 
-如果你希望团队共享同一套 skills，最佳实践不是“每个人手工复制一次”，而是把这份仓库作为技能源，并约定统一的同步脚本或安装流程。
+常用选项：`-g` 安装到用户级（全局）、`-a <agent>` 指定目标 Agent、`--copy` 用复制代替默认的 symlink。
 
 建议把私密配置文件（例如 `.worktree-links.local.json`）加入业务项目的 `.gitignore`，避免泄露。
 
@@ -59,10 +59,18 @@ done
 - 适合版本发布、周报/月报、产品更新公告。
 - 会把技术性提交转成更易读的用户语言。
 
+## fetch-github-issue-images
+
+从 GitHub Issue 中提取并下载截图/附件图片。
+
+说明：
+- 通过 `gh api` 的 `body_html` 响应获取 CDN 直链，绕过 `github.com` 直连限制。
+- 适合分析 Issue 附图、下载 Issue 附件的场景。
+
 ## prompt-engineering
 
 用于编写和优化 prompts、commands、hooks、skills、sub-agent prompts 等一切 LLM 指令资产。
 
 说明：
 - 适合把模糊需求收敛成稳定、可复用、可验证的 prompt 模板。
-- 当前版本已按 Codex 使用场景压缩主 skill，并把扩展知识拆到 `references/`。
+- 当前版本主 skill 保持精简，扩展知识拆到 `references/`。
