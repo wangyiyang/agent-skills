@@ -1,6 +1,6 @@
 ---
 name: fetch-github-issue-images
-description: 从 GitHub Issue 中提取并下载截图/附件图片。当用户要求查看 Issue 里的截图、分析 Issue 附图、下载 Issue 附件时使用。核心原理：通过 `gh api` 的 `body_html` 响应（`Accept: application/vnd.github.html+json`）获取 CDN 直链（`private-user-images.githubusercontent.com`），绕过 `github.com` 直连限制。
+description: "从 GitHub Issue 中提取并下载截图/附件图片。当用户要求查看 Issue 里的截图、分析 Issue 附图、下载 Issue 附件时使用。核心原理：通过 `gh api` 的 `body_html` 响应（`Accept: application/vnd.github.html+json`）获取 CDN 直链（`private-user-images.githubusercontent.com`），绕过 `github.com` 直连限制。"
 ---
 
 # GitHub Issue 图片获取 Skill
