@@ -1,30 +1,28 @@
 # agent-skills
 
-团队共享的 Agent Skills 仓库（GitHub Flow）。
+团队共享的 Codex Skills 仓库（GitHub Flow）。
 
-## Claude Code 安装（推荐：项目级 Skills，团队共享）
+## Codex 安装
 
-按 Claude Code 官方文档，Claude Code 会自动发现三类 Skills：个人 `~/.claude/skills/`、项目 `.claude/skills/`、以及插件内 Skills。
+当前仓库维护的是一组自定义 Codex skills，建议直接同步到个人目录 `~/.codex/skills/`。
 
-推荐把 Skill 放到业务项目仓库的 `.claude/skills/` 并提交，团队 `git pull` 后自动生效。
-
-```bash
-# 在业务项目仓库内
-mkdir -p .claude/skills
-cp -R /path/to/agent-skills/issue-worktree .claude/skills/issue-worktree
-git add .claude/skills/issue-worktree
-git commit -m "Add issue-worktree Claude Code skill"
-git push
-```
-
-个人安装（只对自己生效）：
+单个 skill 安装：
 
 ```bash
-mkdir -p ~/.claude/skills
-cp -R ./issue-worktree ~/.claude/skills/issue-worktree
+mkdir -p ~/.codex/skills
+rsync -a ./issue-worktree/ ~/.codex/skills/issue-worktree/
 ```
 
-可选：`npx skills add ...` 这类一键安装工具（如 baoyu-skills 的做法）是第三方分发方案，建议你们团队评估后再采用。
+批量同步当前仓库全部自定义 skills：
+
+```bash
+mkdir -p ~/.codex/skills
+for skill in agree-and-execute changelog-generator commit-push-pr issue-worktree prompt-engineering; do
+  rsync -a "./$skill/" "~/.codex/skills/$skill/"
+done
+```
+
+如果你希望团队共享同一套 skills，最佳实践不是“每个人手工复制一次”，而是把这份仓库作为技能源，并约定统一的同步脚本或安装流程。
 
 建议把私密配置文件（例如 `.worktree-links.local.json`）加入业务项目的 `.gitignore`，避免泄露。
 
@@ -52,3 +50,19 @@ cp -R ./issue-worktree ~/.claude/skills/issue-worktree
 说明：
 - 遵循 GitHub Flow，不直接往 `main` 推送功能改动。
 - 适合“提交 PR”“帮我 commit 并 push”“开个 PR”这类请求。
+
+## changelog-generator
+
+从 Git 提交历史生成面向用户的 changelog 或 release notes。
+
+说明：
+- 适合版本发布、周报/月报、产品更新公告。
+- 会把技术性提交转成更易读的用户语言。
+
+## prompt-engineering
+
+用于编写和优化 prompts、commands、hooks、skills、sub-agent prompts 等一切 LLM 指令资产。
+
+说明：
+- 适合把模糊需求收敛成稳定、可复用、可验证的 prompt 模板。
+- 当前版本已按 Codex 使用场景压缩主 skill，并把扩展知识拆到 `references/`。

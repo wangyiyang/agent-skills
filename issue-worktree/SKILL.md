@@ -11,7 +11,7 @@ description: 从 GitHub Issue 或 Linear Issue 自动创建 Git 分支 + git wor
 
 ## 工作流（建议默认）
 
-路径说明：以下命令以“项目级 skill”路径 `.claude/skills/issue-worktree` 为例；如果你把它安装到个人目录，请把路径替换为 `~/.claude/skills/issue-worktree`。
+路径说明：以下命令以当前仓库内的 `issue-worktree` 目录为例；如果你把它安装到个人目录，请把路径替换为 `~/.codex/skills/issue-worktree`。
 
 ### 1) 明确输入与目标
 
