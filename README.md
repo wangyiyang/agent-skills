@@ -4,29 +4,25 @@
 
 ## 安装
 
-不同 Agent 的 skills 目录不同，按需同步到对应目录：
-
-| Agent | Skills 目录 |
-| --- | --- |
-| Claude Code | `~/.claude/skills/` |
-| Pi | `~/.pi/agent/skills/` |
-| Codex | `~/.codex/skills/` |
-
-单个 skill 安装（以 Codex 为例，其他 Agent 替换目标目录即可）：
+使用 [skills CLI](https://github.com/vercel-labs/skills) 安装，自动检测本机 Agent（Claude Code、Pi、Codex 等）并写入对应 skills 目录：
 
 ```bash
-mkdir -p ~/.codex/skills
-rsync -a ./issue-worktree/ ~/.codex/skills/issue-worktree/
+# 交互式选择要安装的 skill 和目标 Agent
+npx skills add wangyiyang/dev-agent-skills
+
+# 全部 skills 装到所有 Agent，跳过确认
+npx skills add wangyiyang/dev-agent-skills --all
 ```
 
-批量同步当前仓库全部 skills（以 Pi 为例）：
+常用命令：
 
 ```bash
-mkdir -p ~/.pi/agent/skills
-for skill in agree-and-execute changelog-generator commit-push-pr fetch-github-issue-images issue-worktree prompt-engineering; do
-  rsync -a "./$skill/" "~/.pi/agent/skills/$skill/"
-done
+npx skills list -g          # 查看已安装
+npx skills update           # 更新到最新版本
+npx skills remove <skill>   # 卸载
 ```
+
+常用选项：`-g` 安装到用户级（全局）、`-a <agent>` 指定目标 Agent、`--copy` 用复制代替默认的 symlink。
 
 建议把私密配置文件（例如 `.worktree-links.local.json`）加入业务项目的 `.gitignore`，避免泄露。
 
