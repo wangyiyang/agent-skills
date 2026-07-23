@@ -1,4 +1,4 @@
-# agent-skills
+# dev-agent-skills
 
 个人开发使用的 Agent Skills 仓库，适用于 Claude Code、Pi、Codex 等各类开发 Agent。
 
