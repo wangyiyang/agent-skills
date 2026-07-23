@@ -1,6 +1,6 @@
 interface:
   display_name: "Fetch Issue Images"
   short_description: "Extract and download screenshots/attachments from GitHub Issue body via gh API (CDN bypass)"
-  default_prompt: "Use $fetch-issue-images to download screenshots from this GitHub issue for analysis."
+  default_prompt: "Use $fetch-github-issue-images to download screenshots from this GitHub issue for analysis."
 policy:
   allow_implicit_invocation: true
